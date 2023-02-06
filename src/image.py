@@ -2,6 +2,8 @@
 # -*- coding:utf-8 -*-
 import sys
 import os
+import numpy
+
 picdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pic')
 libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib')
 if os.path.exists(libdir):
