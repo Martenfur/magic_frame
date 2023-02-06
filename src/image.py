@@ -38,12 +38,12 @@ SATURATED_PALETTE = [
     [255, 255, 255]   # Clear
 ]
 
-def _palette_blend(self, saturation, dtype='uint8'):
+def _palette_blend(saturation, dtype='uint8'):
     saturation = float(saturation)
     palette = []
     for i in range(7):
-        rs, gs, bs = [c * saturation for c in self.SATURATED_PALETTE[i]]
-        rd, gd, bd = [c * (1.0 - saturation) for c in self.DESATURATED_PALETTE[i]]
+        rs, gs, bs = [c * saturation for c in SATURATED_PALETTE[i]]
+        rd, gd, bd = [c * (1.0 - saturation) for c in DESATURATED_PALETTE[i]]
         if dtype == 'uint8':
             palette += [int(rs + rd), int(gs + gd), int(bs + bd)]
         if dtype == 'uint24':
