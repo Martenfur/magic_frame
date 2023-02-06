@@ -220,7 +220,7 @@ class EPD:
         [255, 255, 255]   # Clear
     ]
 
-    def _palette_blend(saturation, dtype='uint8'):
+    def palette_blend(saturation, dtype='uint8'):
         saturation = float(saturation)
         palette = []
         for i in range(7):
@@ -241,7 +241,7 @@ class EPD:
     def getbuffer(self, image):
         # Create a pallette with the 7 colors supported by the panel
         pal_image = Image.new("P", (1,1))
-        ppp = _palette_blend(0.5)
+        ppp = self.palette_blend(0.5)
         pal_image.putpalette(ppp + [0, 0, 0] * 248)
         #pal_image.putpalette( (0,0,0,  255,255,255,  0,255,0,   0,0,255,  255,0,0,  255,255,0, 255,128,0) + (0,0,0)*249)
 
