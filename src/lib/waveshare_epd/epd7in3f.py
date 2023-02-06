@@ -197,10 +197,53 @@ class EPD:
         self.send_data(0x00)
         return 0
 
+
+    DESATURATED_PALETTE = [
+        [0, 0, 0],        # Black
+        [255, 255, 255],  # White
+        [0, 255, 0],      # Green
+        [0, 0, 255],      # Blue
+        [255, 0, 0],      # Red
+        [255, 255, 0],    # Yellow
+        [255, 140, 0],    # Orange
+        [255, 255, 255]   # Clear
+    ]
+
+    SATURATED_PALETTE = [
+        [0, 0, 0],        # Black
+        [217, 242, 255],  # White
+        [3, 124, 76],     # Green
+        [27, 46, 198],    # Blue
+        [245, 80, 34],    # Red
+        [255, 255, 68],   # Yellow
+        [239, 121, 44],   # Orange
+        [255, 255, 255]   # Clear
+    ]
+
+    def _palette_blend(saturation, dtype='uint8'):
+        saturation = float(saturation)
+        palette = []
+        for i in range(7):
+            rs, gs, bs = [c * saturation for c in SATURATED_PALETTE[i]]
+            rd, gd, bd = [c * (1.0 - saturation) for c in DESATURATED_PALETTE[i]]
+            if dtype == 'uint8':
+                palette += [int(rs + rd), int(gs + gd), int(bs + bd)]
+            if dtype == 'uint24':
+                palette += [(int(rs + rd) << 16) | (int(gs + gd) << 8) | int(bs + bd)]
+        if dtype == 'uint8':
+            palette += [255, 255, 255]
+        if dtype == 'uint24':
+            palette += [0xffffff]
+        return palette
+
+
+
     def getbuffer(self, image):
         # Create a pallette with the 7 colors supported by the panel
         pal_image = Image.new("P", (1,1))
-        pal_image.putpalette( (0,0,0,  255,255,255,  0,255,0,   0,0,255,  255,0,0,  255,255,0, 255,128,0) + (0,0,0)*249)
+        ppp = _palette_blend(0.5)
+        pal_image.putpalette(ppp + [0, 0, 0] * 248)
+        #pal_image.putpalette( (0,0,0,  255,255,255,  0,255,0,   0,0,255,  255,0,0,  255,255,0, 255,128,0) + (0,0,0)*249)
 
         # Check if we need to rotate the image
         imwidth, imheight = image.size
@@ -212,7 +255,7 @@ class EPD:
             logger.warning("Invalid image dimensions: %d x %d, expected %d x %d" % (imwidth, imheight, self.width, self.height))
 
         # Convert the soruce image to the 7 colors, dithering if needed
-        image_7color = image_temp.convert("RGB")#.quantize(palette=pal_image)
+        image_7color = image_temp.convert("RGB").quantize(palette=pal_image)
         buf_7color = bytearray(image_7color.tobytes('raw'))
 
         # PIL does not support 4 bit color, so pack the 4 bits of color

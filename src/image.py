@@ -66,17 +66,8 @@ try:
     logging.info("reading image")
     Himage = Image.open(os.path.join(picdir, 'demo.jpg'))
 
-    palette = _palette_blend(0.5)
-    # Image size doesn't matter since it's just the palette we're using
-    palette_image = Image.new("P", (1, 1))
-    # Set our 7 colour palette (+ clear) and zero out the other 247 colours
-    palette_image.putpalette(palette + [0, 0, 0] * 248)
-    # Force source image data to be loaded for `.im` to work
-    Himage.load()
-    Himage = Himage.im.convert("P", True, palette_image.im)
-
     epd.display(epd.getbuffer(Himage))
-    
+
     logging.info("Goto Sleep...")
     epd.sleep()
     
