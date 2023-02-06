@@ -220,7 +220,7 @@ class EPD:
         [255, 255, 255]   # Clear
     ]
 
-    def palette_blend(saturation, dtype='uint8'):
+    def palette_blend(self, saturation, dtype='uint8'):
         saturation = float(saturation)
         palette = []
         for i in range(7):
