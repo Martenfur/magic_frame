@@ -40,6 +40,7 @@ drag queen
 prideparade
 pride parade
 non binary
+non-binary
 nonbinary
 ace
 blackpower
@@ -62,3 +63,23 @@ hatespeech
 hate speech
 policebrutality
 police brutality
+feminism
+feminist
+bipoc
+lgbtqqiapp
+gender identity
+genderidentity
+sexuality
+equity
+intersex
+intersexual
+transsexual
+homosexual
+asexual
+aromantic
+aroace
+lgbtqiap
+transkids
+trans kids
+polysexual
+polysexuality
