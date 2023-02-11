@@ -3,6 +3,7 @@ import json
 import os
 from . import img_utils
 from . import censor
+from . import duplicates
 import random
 
 class ArtstationImageSource:
@@ -37,9 +38,11 @@ class ArtstationImageSource:
 		for data in json_data["data"]:
 			shuffled_data.append(data)
 		random.shuffle(shuffled_data)
-		print("candidates: " + str(len(shuffled_data)))
 
 		for data in shuffled_data:
+			if duplicates.contains(data["hash_id"]):
+				print("Skipping duplicate image: " + data["hash_id"])
+				continue
 			art_url = self.art_base_url + data["hash_id"] + ".json"
 			print(data["url"])
 
@@ -48,5 +51,6 @@ class ArtstationImageSource:
 			art = json.loads(art_response.text)
 			img = self.__get_art_data(art, is_landscape)
 			if img != None:
+				duplicates.add(data["hash_id"])
 				return img
 		return None
