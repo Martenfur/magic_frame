@@ -2,6 +2,7 @@ import requests
 import PIL
 from PIL import Image
 import io
+import os
 
 def is_landscape(w, h):
 	return w >= h
@@ -49,5 +50,6 @@ def download_image(url):
 		handler.write(img_data)
 
 	image_temp = Image.open('temp.png')
-
+	image_temp.load()
+	os.remove('temp.png')
 	return image_temp
