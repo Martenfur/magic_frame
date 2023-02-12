@@ -1,3 +1,4 @@
+from image_sources.aggregation import AggregationImageSource
 from image_sources.artstation import ArtstationImageSource
 from image_sources import img_utils
 
@@ -5,7 +6,8 @@ import PIL
 from PIL import Image
 import io
 
-source = ArtstationImageSource()
+#source = ArtstationImageSource()
+source = AggregationImageSource()
 img = source.get_image(False)
 #img.show()
 
