@@ -11,6 +11,7 @@ def is_text_appropriate(text):
 	global _blacklist
 	for tag in _blacklist:
 		if tag in text.lower():
+			print("Inappropriate text: " + text + "\n Blacklisted word: " + tag)
 			return False
 	return True
 
@@ -18,6 +19,7 @@ def is_tags_appropriate(tags):
 	global _blacklist
 	for tag in tags:
 		if tag.lower() in _blacklist:
+			print("Inappropriate tag: " + tag)
 			return False
 	return True
 

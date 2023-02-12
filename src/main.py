@@ -11,10 +11,14 @@ source = DeviantartImageSource()
 #source = ArtstationImageSource()
 #source = AggregationImageSource()
 
-img = source.get_image(False)
-#img.show()
+if True:
+	img = source.get_image(True)
+	img = img_utils.resize_image(img, 800, 480)
+else:
+	img = source.get_image(False)
+	img = img_utils.resize_image(img, 480, 800)
 
-img = img_utils.resize_image(img, 480, 800)
+
 img.show()
 
 pal_image = Image.new("P", (1,1))

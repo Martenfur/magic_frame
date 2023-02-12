@@ -25,8 +25,11 @@ bisexual
 queer
 demisexual
 pansexual
-trans
+trans 
+trans.
+trans,
 transgender
+trans-gender
 blm
 blacklivesmatter
 black lives matter
@@ -85,3 +88,4 @@ supporthumanartists
 support human artists
 aiistheft
 ai is theft
+cosplay

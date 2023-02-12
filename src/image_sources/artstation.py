@@ -12,7 +12,7 @@ class ArtstationImageSource:
 
 	def __get_art_data(self, art, is_landscape):
 		if not censor.is_appropriate(art["tags"], art["title"], art["description"]):
-			return False
+			return None
 
 		for asset in art["assets"]:
 			# Skipping non-images.

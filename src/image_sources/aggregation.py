@@ -14,7 +14,7 @@ class AggregationImageSource:
 		for i in range(0, self._retry_count):
 			try:
 				img = self._artstation.get_image(is_landscape)
-				if img is bool:
+				if img == None:
 					raise TypeError()
 				return img
 			except:
