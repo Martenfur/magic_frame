@@ -1,13 +1,16 @@
 from image_sources.aggregation import AggregationImageSource
 from image_sources.artstation import ArtstationImageSource
+from image_sources.deviantart import DeviantartImageSource
 from image_sources import img_utils
 
 import PIL
 from PIL import Image
 import io
 
+source = DeviantartImageSource()
 #source = ArtstationImageSource()
-source = AggregationImageSource()
+#source = AggregationImageSource()
+
 img = source.get_image(False)
 #img.show()
 
