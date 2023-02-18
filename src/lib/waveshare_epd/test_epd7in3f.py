@@ -54,7 +54,7 @@ class EPD:
         self.GREEN  = 0x00ff00   #   0010
         self.BLUE   = 0xff0000   #   0011
         self.RED    = 0x0000ff   #   0100
-        self.YELLOW = 0xffffff   #   0101
+        self.YELLOW = 0x00ffff   #   0101
         self.ORANGE = 0x0080ff   #   0110
         
     # Hardware reset
@@ -197,10 +197,53 @@ class EPD:
         self.send_data(0x00)
         return 0
 
+
+    DESATURATED_PALETTE = [
+        [0, 0, 0],        # Black
+        [255, 255, 255],  # White
+        [0, 255, 0],      # Green
+        [0, 0, 255],      # Blue
+        [255, 0, 0],      # Red
+        [255, 255, 0],    # Yellow
+        [255, 140, 0],    # Orange
+        [255, 255, 255]   # Clear
+    ]
+
+    SATURATED_PALETTE = [
+        [0, 0, 0],        # Black
+        [217, 242, 255],  # White
+        [3, 124, 76],     # Green
+        [27, 46, 198],    # Blue
+        [245, 80, 34],    # Red
+        [255, 255, 68],   # Yellow
+        [239, 121, 44],   # Orange
+        [255, 255, 255]   # Clear
+    ]
+
+    def palette_blend(self, saturation, dtype='uint8'):
+        saturation = float(saturation)
+        palette = []
+        for i in range(7):
+            rs, gs, bs = [c * saturation for c in self.SATURATED_PALETTE[i]]
+            rd, gd, bd = [c * (1.0 - saturation) for c in self.DESATURATED_PALETTE[i]]
+            if dtype == 'uint8':
+                palette += [int(rs + rd), int(gs + gd), int(bs + bd)]
+            if dtype == 'uint24':
+                palette += [(int(rs + rd) << 16) | (int(gs + gd) << 8) | int(bs + bd)]
+        if dtype == 'uint8':
+            palette += [255, 255, 255]
+        if dtype == 'uint24':
+            palette += [0xffffff]
+        return palette
+
+
+
     def getbuffer(self, image):
         # Create a pallette with the 7 colors supported by the panel
         pal_image = Image.new("P", (1,1))
-        pal_image.putpalette( (0,0,0,  255,255,255,  0,255,0,   0,0,255,  255,0,0,  255,128,0) + (0,0,0)*250)
+        #ppp = self.palette_blend(0.5)
+        #pal_image.putpalette(ppp + [0, 0, 0] * 248)
+        pal_image.putpalette( (0,0,0,  255,255,255,  0,255,0,   0,0,255,  255,0,0,  255,255,0, 255,128,0) + (0,0,0)*249)
 
         # Check if we need to rotate the image
         imwidth, imheight = image.size
