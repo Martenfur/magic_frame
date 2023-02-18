@@ -213,7 +213,7 @@ class EPD:
 
         # Convert the soruce image to the 7 colors, dithering if needed
         image_7color = image_temp.convert("RGB").quantize(palette=pal_image)
-        image_7color.save("/var/vault/vault/rnd/imgtest.bmp")
+        #image_7color.save("/var/vault/vault/rnd/imgtest.bmp")
         buf_7color = bytearray(image_7color.tobytes('raw'))
         print("BUFFER LEN: " + str(len(buf_7color)))
         print("SIZE: " + str(image.size))
