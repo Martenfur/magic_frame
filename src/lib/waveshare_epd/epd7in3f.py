@@ -200,8 +200,8 @@ class EPD:
     def getbuffer(self, image):
         # Create a pallette with the 7 colors supported by the panel
         pal_image = Image.new("P", (1,1))
-        pal_image.putpalette( (0, 0, 0,  217, 242, 255,  3, 124, 76,  27, 46, 198,  245, 80, 34,  239, 121, 44) + (0,0,0)*249)
-
+        #pal_image.putpalette( (0, 0, 0,  217, 242, 255,  3, 124, 76,  27, 46, 198,  245, 80, 34,  239, 121, 44) + (0,0,0)*249)
+        pal_image.putpalette( (0,0,0,  255,255,255,  0,255,0,   0,0,255,  255,0,0,  255,255,0, 255,128,0) + (0,0,0)*249)
         # Check if we need to rotate the image
         imwidth, imheight = image.size
         if(imwidth == self.width and imheight == self.height):
@@ -215,6 +215,9 @@ class EPD:
         image_7color = image_temp.convert("RGB").quantize(palette=pal_image)
         image_7color.save("/var/vault/vault/rnd/imgtest.bmp")
         buf_7color = bytearray(image_7color.tobytes('raw'))
+        print("BUFFER LEN: " + str(len(buf_7color)))
+        print("SIZE: " + str(image.size))
+        
 
         # PIL does not support 4 bit color, so pack the 4 bits of color
         # into a single byte to transfer to the panel
