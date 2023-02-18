@@ -54,7 +54,7 @@ class EPD:
         self.GREEN  = 0x00ff00   #   0010
         self.BLUE   = 0xff0000   #   0011
         self.RED    = 0x0000ff   #   0100
-        self.YELLOW = 0x00ffff   #   0101
+        self.YELLOW = 0xffffff   #   0101
         self.ORANGE = 0x0080ff   #   0110
         
     # Hardware reset
@@ -146,8 +146,8 @@ class EPD:
         self.send_command(0x06)
         self.send_data(0x6F)
         self.send_data(0x1F)
-        self.send_data(0x1F)
-        self.send_data(0x22)
+        self.send_data(0x16)
+        self.send_data(0x25)
 
         self.send_command(0x08)
         self.send_data(0x6F)
@@ -160,7 +160,7 @@ class EPD:
         self.send_data(0x04)
 
         self.send_command(0x30)
-        self.send_data(0x3C)
+        self.send_data(0x02)
 
         self.send_command(0x41)     # TSE
         self.send_data(0x00)
@@ -200,8 +200,8 @@ class EPD:
     def getbuffer(self, image):
         # Create a pallette with the 7 colors supported by the panel
         pal_image = Image.new("P", (1,1))
+        #pal_image.putpalette( (0, 0, 0,  217, 242, 255,  3, 124, 76,  27, 46, 198,  245, 80, 34,  239, 121, 44) + (0,0,0)*249)
         pal_image.putpalette( (0,0,0,  255,255,255,  0,255,0,   0,0,255,  255,0,0,  255,255,0, 255,128,0) + (0,0,0)*249)
-
         # Check if we need to rotate the image
         imwidth, imheight = image.size
         if(imwidth == self.width and imheight == self.height):
@@ -217,6 +217,7 @@ class EPD:
         buf_7color = bytearray(image_7color.tobytes('raw'))
         print("BUFFER LEN: " + str(len(buf_7color)))
         print("SIZE: " + str(image.size))
+        
 
         # PIL does not support 4 bit color, so pack the 4 bits of color
         # into a single byte to transfer to the panel
@@ -247,3 +248,4 @@ class EPD:
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()
 ### END OF FILE ###
+
