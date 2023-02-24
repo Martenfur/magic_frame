@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 
 class RaspberryPi:
     # Pin definition
-    RST_PIN  = 17
+    RST_PIN  = 27 # Originally 17.
     DC_PIN   = 25
     CS_PIN   = 8
     BUSY_PIN = 24
