@@ -25,7 +25,9 @@ def rotate_image(img, orientation):
 			return img.transpose(Image.ROTATE_180)
 	else:
 		if orientation == "bottom":
-			return img.transpose(Image.ROTATE_180)
+			return img.transpose(Image.ROTATE_270)
+		if orientation == "top":
+			return img.transpose(Image.ROTATE_90)
 	return img
 
 def resize_image(img, new_w, new_h):
