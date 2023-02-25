@@ -211,7 +211,7 @@ class EPD:
 		else:
 			logger.warning("Invalid image dimensions: %d x %d, expected %d x %d" % (imwidth, imheight, self.width, self.height))
 
-		onvert the soruce image to the 7 colors, dithering if needed
+		#Convert the soruce image to the 7 colors, dithering if needed
 		image_7color = image_temp.convert("RGB").quantize(palette=pal_image)
 		#image_7color.save("/var/vault/vault/rnd/imgtest.bmp")
 		buf_7color = bytearray(image_7color.tobytes('raw'))
