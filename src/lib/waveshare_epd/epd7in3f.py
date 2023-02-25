@@ -218,7 +218,7 @@ class EPD:
 		print("BUFFER LEN: " + str(len(buf_7color)))
 		print("SIZE: " + str(image.size))
 
-		IL does not support 4 bit color, so pack the 4 bits of color
+		# PIL does not support 4 bit color, so pack the 4 bits of color
 		# into a single byte to transfer to the panel
 		buf = [0x00] * int(self.width * self.height / 2)
 		idx = 0
