@@ -70,9 +70,9 @@ class EPD:
 		epdconfig.digital_write(self.dc_pin, 0)
 		epdconfig.digital_write(self.cs_pin, 0)
 		epdconfig.spi_writebyte([command])
-	dconfig.digital_write(self.cs_pin, 1)
+		epdconfig.digital_write(self.cs_pin, 1)
 
-	 send_data(self, data):
+	def send_data(self, data):
 		epdconfig.digital_write(self.dc_pin, 1)
 		epdconfig.digital_write(self.cs_pin, 0)
 		epdconfig.spi_writebyte([data])
