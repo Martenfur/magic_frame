@@ -64,6 +64,9 @@ class DeviantartImageSource:
 		response = self._get_auth(self._daily_endpoint.replace("%date%", formatted_date))
 		json_data = json.loads(response.text)
 		for data in json_data["results"]:
+			if duplicates.contains(data["deviationid"]):
+				print("Skipping duplicate image: " + data["deviationid"])
+				continue
 			if data["category"] != "Visual Art":
 				continue
 			img = self.__get_art_data(data, is_landscape)
