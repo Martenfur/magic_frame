@@ -17,6 +17,17 @@ def get_ratio(w, h):
 		return 0
 	return w / h
 
+def rotate_image(img, orientation):
+	img_w, img_h = img.size
+	# Don't fucking ask.
+	if is_landscape(img_w, img_h):
+		if orientation == "right":
+			return img.transpose(Image.ROTATE_180)
+	else:
+		if orientation == "bottom":
+			return img.transpose(Image.ROTATE_180)
+	return img
+
 def resize_image(img, new_w, new_h):
 	ratio = new_w / new_h
 

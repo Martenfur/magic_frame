@@ -14,21 +14,26 @@ from image_sources.aggregation import AggregationImageSource
 from image_sources.artstation import ArtstationImageSource
 from image_sources.deviantart import DeviantartImageSource
 from image_sources import img_utils
+import orientation
 
 import PIL
 from PIL import Image, ImageEnhance
 import io
 
+orientation.update()
+
 #source = DeviantartImageSource()
 source = ArtstationImageSource()
 #source = AggregationImageSource()
 
-if False:
+if orientation.is_landscape():
 	img = source.get_image(True)
 	img = img_utils.resize_image(img, 800, 480)
 else:
 	img = source.get_image(False)
 	img = img_utils.resize_image(img, 480, 800)
+
+img = img_utils.rotate_image(img, orientation.get())
 
 
 converter = ImageEnhance.Color(img)
