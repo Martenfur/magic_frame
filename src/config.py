@@ -18,5 +18,5 @@ def load(path = "config.json"):
 	current = Fields(json_string)
 
 	if hasattr(current, "remote_config") and os.path.exists(current.remote_config):
-		init(current.remote_config)
+		load(current.remote_config)
 		return
