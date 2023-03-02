@@ -1,0 +1,10 @@
+[Unit]
+Description = Magic frame daemon.
+After = network.target
+
+[Service]
+WorkingDirectory=/home/pi/magic_frame/src/
+ExecStart = python3 main.py
+
+[Install]
+WantedBy = multi-user.target
