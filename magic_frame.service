@@ -1,6 +1,6 @@
 [Unit]
 Description = Magic frame daemon.
-After = network.target
+After = network.target, multi-user.target
 
 [Service]
 WorkingDirectory=/home/pi/magic_frame/src/
