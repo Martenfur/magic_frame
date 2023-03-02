@@ -22,7 +22,6 @@ class AggregationImageSource:
 				self._used_sources.append(self._sources[src])
 		if len(self._used_sources) == 0:
 			self._used_sources.append(_sources["local"])
-		print(self._used_sources)
 
 	def get_image(self, is_landscape):
 		for src in self._used_sources:
