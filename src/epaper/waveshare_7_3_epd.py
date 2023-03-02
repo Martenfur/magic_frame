@@ -1,12 +1,10 @@
-import sys
-import os
+from epaper.drivers import epd7in3f
 
-libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib')
-if os.path.exists(libdir):
-	sys.path.append(libdir)
-from waveshare_epd import epd7in3f
+def get_width():
+	return epd7in3f.EPD_WIDTH
 
-import io
+def get_height():
+	return epd7in3f.EPD_HEIGHT
 
 def display(img):
 	try:

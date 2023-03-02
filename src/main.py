@@ -1,4 +1,4 @@
-import epaper 
+import epd 
 from art import Art
 
 # This file is meant to be run on a Raspberry Pi with all hardware installed.
@@ -6,4 +6,4 @@ from art import Art
 
 downloaded_art = Art()
 
-epaper.display(img)
+epd.display(downloaded_art.processed_image)
