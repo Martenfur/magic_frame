@@ -38,5 +38,5 @@
 	//            https://www.waveshare.com/7.3inch-e-Paper-HAT-F.htm
 	// dummy    - test implementation that simply calls Image.show()
 	//            with default resolution of 800x480.
-	"epaper_type": "7.3inch",
+	"epaper_type": "7.3inch"
 }
