@@ -1,14 +1,9 @@
 import epaper 
 from art import Art
 
-import PIL
-from PIL import ImageEnhance
+# This file is meant to be run on a Raspberry Pi with all hardware installed.
+# Run this from src directory.
 
 downloaded_art = Art()
 
-converter = ImageEnhance.Color(downloaded_art.processed_image)
-img = converter.enhance(1.3)
-
 epaper.display(img)
-
-print("cock")
