@@ -1,0 +1,42 @@
+{
+	// If this field is present and the config at specified path exists,
+	// Magic Frame will use that config and discard all fields from this one.
+	// This can be useful if you want to modify the config remotely.
+	// Since Magic Frame is turned off most of the time, we can't really 
+	// log into it. But we can set up a remote server and a shared folder,
+	// put our config in there and point Magic Frame to it.
+	"remote_config": "/path/to/config.json",
+
+	// Specifies which image sources to use. 
+	// Currently available image sources:
+	// deviantart - pulls images from deviantart.com 
+	// artstation - pulls images from artstation
+	// local - pulls images from a local directory
+	// The script will always take the first source in the array
+	// and fallback to the next source if it fails to get an image.
+	"image_sources": ["deviantart", "artstation", "local"],
+
+	// local image source will pull its images from this directory.
+	// If you don't use the local image source, you don't have to 
+	// fill this field.
+	"local_images_path": "/path/to/local/images/",
+
+	// Deviantart doesn't let people use its api without creating
+	// an account and logging in. In order to use Deviantart, you
+	// need to create an app on deviantart.com, get your client id 
+	// and client secret and paste them here.
+	"deviantart_client_id": "your-client-secret",
+	"deviantart_client_secret": "your-client-id",
+
+	// Type of the display used.
+	// Currently supported options:
+	// 4.01inch - 4.01 inch 7-color display from Waveshare.
+	//            https://www.waveshare.com/4.01inch-e-Paper-HAT-F.htm
+	// 5.65inch - 5.65 inch 7-color display from Waveshare.
+	//            https://www.waveshare.com/5.65inch-e-Paper-Module-F.htm
+	// 7.3inch  - 7.3 inch 7-color epaper display from Waveshare.
+	//            https://www.waveshare.com/7.3inch-e-Paper-HAT-F.htm
+	// dummy    - test implementation that simply calls Image.show()
+	//            with default resolution of 800x480.
+	"epaper_type": "7.3inch",
+}
