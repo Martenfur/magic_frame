@@ -11,7 +11,7 @@
 	// Currently available image sources:
 	// deviantart - pulls images from deviantart.com 
 	// artstation - pulls images from artstation
-	// local - pulls images from a local directory
+	// local      - pulls images from a local directory
 	// The script will always take the first source in the array
 	// and fallback to the next source if it fails to get an image.
 	"image_sources": ["deviantart", "artstation", "local"],

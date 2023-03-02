@@ -1,6 +1,9 @@
-import epd 
+import config
+config.load()
+
 from art import Art
 from PIL import Image
+from epaper import epd 
 
 # This is a test file meant to be run manually on a desktop
 # to test out importers and other features.

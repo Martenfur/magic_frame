@@ -1,17 +1,22 @@
 import os
+import json
+import re
 
 current = None
 
 class Fields(object):
-	def __init__(self, f):
-		self.__dict__ = json.load(f)
+	def __init__(self, s):
+		self.__dict__ = json.loads(s)
 
-def init(path = "config.json"):
+def load(path = "config.json"):
 	global current
 
-	f = open(path)
-	current = Fields(f)
-	f.close()
+	# Have to strip the comments before parsing because python is a retаrd.
+	with open(path, "r") as JSONfile:
+		json_string = "".join(re.split(r"(?://|#).*(?=\n)", JSONfile.read())).strip()
+
+	print(json_string)
+	current = Fields(json_string)
 
 	if hasattr(current, "remote_config") and os.path.exists(current.remote_config):
 		init(current.remote_config)

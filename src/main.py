@@ -1,3 +1,6 @@
+import config
+config.load()
+
 import epd 
 from art import Art
 

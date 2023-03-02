@@ -7,6 +7,7 @@ from . import duplicates
 import random
 from datetime import date
 from datetime import timedelta
+import config
 
 class DeviantartImageSource:
 
@@ -37,12 +38,7 @@ class DeviantartImageSource:
 		return img_utils.download_image(art["content"]["src"])
 
 	def _login(self):
-
-		f = open('deviantart_config.json')
-		config = json.load(f)
-		f.close()
-
-		final_url = self._login_endpoint.replace("%client_id%", config["client_id"]).replace("%client_secret%", config["client_secret"])
+		final_url = self._login_endpoint.replace("%client_id%", config.current.deviantart_client_id).replace("%client_secret%", config.current.deviantart_client_secret)
 		response = requests.get(final_url)
 		json_data = json.loads(response.text)
 		self._access_token = json_data["access_token"]
