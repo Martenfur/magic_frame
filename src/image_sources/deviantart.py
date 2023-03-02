@@ -43,18 +43,18 @@ class DeviantartImageSource:
 		f.close()
 
 		final_url = self._login_endpoint.replace("%client_id%", config["client_id"]).replace("%client_secret%", config["client_secret"])
-		response = requests.get(final_url, verify=False)
+		response = requests.get(final_url)
 		json_data = json.loads(response.text)
 		self._access_token = json_data["access_token"]
 
 
 	def _get_auth(self, url):
 		auth_url = url.replace("%access_token%", self._access_token)
-		response = requests.get(auth_url, verify=False)
+		response = requests.get(auth_url)
 		if response.status_code == 401:
 			self._login()
 			auth_url = url.replace("%access_token%", self._access_token)
-			response = requests.get(auth_url, verify=False)
+			response = requests.get(auth_url)
 		return response
 
 	def get_image(self, is_landscape):
