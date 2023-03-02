@@ -20,9 +20,7 @@ class Art:
 	def __init__(self):
 		orientation.update()
 
-		source = DeviantartImageSource()
-		#source = ArtstationImageSource()
-		#source = AggregationImageSource()
+		source = AggregationImageSource()
 
 		if orientation.is_landscape():
 			self.original_image = source.get_image(True)

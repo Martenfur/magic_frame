@@ -15,7 +15,6 @@ def load(path = "config.json"):
 	with open(path, "r") as JSONfile:
 		json_string = "".join(re.split(r"(?://|#).*(?=\n)", JSONfile.read())).strip()
 
-	print(json_string)
 	current = Fields(json_string)
 
 	if hasattr(current, "remote_config") and os.path.exists(current.remote_config):
