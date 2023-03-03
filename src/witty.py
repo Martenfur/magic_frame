@@ -16,6 +16,10 @@ def read_register(address):
 	# Why? No fucking idea!
 	return int(out.replace("0x", ""))
 
+def write_register(address, value):
+	cmd = "i2cset -y 0x01 " + witty_const.I2C_MC_ADDRESS + " " + str(address) + " " + str(value)
+	subprocess.run(cmd, shell = True)
+
 
 def print_rtc_time():
 	year = read_register(witty_const.I2C_RTC_YEARS)
@@ -50,9 +54,32 @@ def print_output_voltage():
 	o = read_register_hex(witty_const.I2C_VOLTAGE_OUT_D)
 	print("Out:"+ str(i + o / 100) + "V")
 
+def set_startup_time(time):
+	write_register(witty_const.I2C_CONF_DAY_ALARM1, time.day)
+	write_register(witty_const.I2C_CONF_HOUR_ALARM1, time.hour)
+	write_register(witty_const.I2C_CONF_MINUTE_ALARM1, time.minute)
+	write_register(witty_const.I2C_CONF_SECOND_ALARM1, time.second)
+
+def set_shutdown_time(time):
+	write_register(witty_const.I2C_CONF_DAY_ALARM2, time.day)
+	write_register(witty_const.I2C_CONF_HOUR_ALARM2, time.hour)
+	write_register(witty_const.I2C_CONF_MINUTE_ALARM2, time.minute)
+	write_register(witty_const.I2C_CONF_SECOND_ALARM2, time.second)
 
 print_rtc_time()
 print_startup_time()
 print_shutdown_time()
 print_input_voltage()
 print_output_voltage()
+
+import datetime
+
+now = datetime.datetime.now()
+shutdown = now + datetime.timedelta(seconds=5)
+startup = now + datetime.timedelta(minutes=1)
+print("PI will shutdown at " + shutdown)
+print("PI will start at " + startup)
+
+set_startup_time(startup)
+set_shutdown_time(shutdown)
+
