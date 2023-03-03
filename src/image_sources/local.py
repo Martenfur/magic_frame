@@ -10,7 +10,7 @@ class LocalImageSource:
 	def get_image(self, is_landscape):
 		files = os.listdir(config.current.local_images_path)
 		random.shuffle(files)
-		for file in files
+		for file in files:
 			if not os.isfile(file):
 				continue
 			full_path = os.path.join(config.current.local_images_path, file)
