@@ -4,7 +4,7 @@ import witty_const
 def read_register(address):
 	cmd = "i2cget -y 0x01 " + witty_const.I2C_MC_ADDRESS + " " + str(address)
 	print(cmd)
-	out = subprocess.check_output(cmd, shell = True).encode()
+	out = subprocess.check_output(cmd, shell = True).decode('utf8')
 	return int(out.replace("0x", ""))
 
 
