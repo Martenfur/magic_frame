@@ -11,11 +11,11 @@ class LocalImageSource:
 		files = os.listdir(config.current.local_images_path)
 		random.shuffle(files)
 		for file in files:
-			print(file)
-			if not os.path.isfile(file):
+			full_path = os.path.join(config.current.local_images_path, file)
+			print(full_path)
+			if not os.path.isfile(full_path):
 				print("Not a file!")
 				continue
-			full_path = os.path.join(config.current.local_images_path, file)
 			if not config.current.local_allow_repeats:
 				if duplicates.contains(full_path):
 					continue
