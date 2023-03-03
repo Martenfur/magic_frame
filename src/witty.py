@@ -17,7 +17,7 @@ def read_register(address):
 	return int(out.replace("0x", ""))
 
 def write_register(address, value):
-	cmd = "i2cset -y 0x01 " + witty_const.I2C_MC_ADDRESS + " " + str(address) + " " + str(value)
+	cmd = "i2cset -y 0x01 " + witty_const.I2C_MC_ADDRESS + " " + str(address) + " 0x" + str(value)
 	subprocess.run(cmd, shell = True)
 
 
@@ -67,8 +67,8 @@ def set_shutdown_time(time):
 	write_register(witty_const.I2C_CONF_SECOND_ALARM2, time.second)
 
 print_rtc_time()
-print_startup_time()
-print_shutdown_time()
+#print_startup_time()
+#print_shutdown_time()
 print_input_voltage()
 print_output_voltage()
 
