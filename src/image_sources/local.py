@@ -12,7 +12,7 @@ class LocalImageSource:
 		random.shuffle(files)
 		for file in files:
 			print(file)
-			if not os.isfile(file):
+			if not os.path.isfile(file):
 				print("Not a file!")
 				continue
 			full_path = os.path.join(config.current.local_images_path, file)
