@@ -43,12 +43,12 @@ def print_shutdown_time():
 def print_input_voltage():
 	i = read_register_hex(witty_const.I2C_VOLTAGE_IN_I)
 	o = read_register_hex(witty_const.I2C_VOLTAGE_IN_D)
-	print("In:"+ str((i + o) / 100) + "V")
+	print("In:"+ str(i + o / 100) + "V")
 
 def print_output_voltage():
 	i = read_register_hex(witty_const.I2C_VOLTAGE_OUT_I)
 	o = read_register_hex(witty_const.I2C_VOLTAGE_OUT_D)
-	print("Out:"+ str((i + o) / 100) + "V")
+	print("Out:"+ str(i + o / 100) + "V")
 
 
 print_rtc_time()
