@@ -77,8 +77,8 @@ import datetime
 now = datetime.datetime.now()
 shutdown = now + datetime.timedelta(seconds=5)
 startup = now + datetime.timedelta(minutes=1)
-print("PI will shutdown at " + shutdown)
-print("PI will start at " + startup)
+print("PI will shutdown at " + str(shutdown))
+print("PI will start at " + str(startup))
 
 set_startup_time(startup)
 set_shutdown_time(shutdown)
