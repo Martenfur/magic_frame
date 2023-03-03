@@ -21,6 +21,9 @@
 	// fill this field.
 	"local_images_path": "/path/to/local/images/",
 
+	// Doesn't check for repeating images when pulling from local directory.
+	"local_allow_repeats": true,
+
 	// Deviantart doesn't let people use its api without creating
 	// an account and logging in. In order to use Deviantart, you
 	// need to create an app on deviantart.com, get your client id 
