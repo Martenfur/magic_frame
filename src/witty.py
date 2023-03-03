@@ -1,6 +1,11 @@
 import subprocess
 import witty_const
 
+def read_register_hex(address):
+	cmd = "i2cget -y 0x01 " + witty_const.I2C_MC_ADDRESS + " " + str(address)
+	out = subprocess.check_output(cmd, shell = True).decode('utf8')
+	return int(out.replace("0x", ""), 16)
+
 def read_register(address):
 	cmd = "i2cget -y 0x01 " + witty_const.I2C_MC_ADDRESS + " " + str(address)
 	out = subprocess.check_output(cmd, shell = True).decode('utf8')
@@ -33,9 +38,21 @@ def print_shutdown_time():
 	hour = read_register(witty_const.I2C_CONF_HOUR_ALARM2)
 	minute = read_register(witty_const.I2C_CONF_MINUTE_ALARM2)
 	second = read_register(witty_const.I2C_CONF_SECOND_ALARM2)
-	print("Scheduled startup date: " + str(hour) + ":" + str(minute) + ":" + str(second) + " " + str(day))
+	print("Scheduled shutdown date: " + str(hour) + ":" + str(minute) + ":" + str(second) + " " + str(day))
+
+def print_input_voltage():
+	i = read_register_hex(I2C_VOLTAGE_IN_I)
+	o = read_register_hex(I2C_VOLTAGE_IN_D)
+	print("In:"+ str((i + o) / 100) + "V")
+
+def print_output_voltage():
+	i = read_register_hex(I2C_VOLTAGE_OUT_I)
+	o = read_register_hex(I2C_VOLTAGE_OUT_D)
+	print("Out:"+ str((i + o) / 100) + "V")
 
 
 print_rtc_time()
 print_startup_time()
 print_shutdown_time()
+print_input_voltage()
+print_output_voltage()
