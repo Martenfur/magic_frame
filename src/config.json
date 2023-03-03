@@ -31,6 +31,16 @@
 	"deviantart_client_id": "your-client-secret",
 	"deviantart_client_secret": "your-client-id",
 
+	// Governs the rate with which Magic Frame will refresh the image.
+	// Available options:
+	// - daily
+	// - hourly
+	"refresh_mode": "daily",
+	// Time of the day when Magic Frame will update.
+	// Uses 24h time in HH:MM format.
+	// Only active when refresh_mode is set to 'daily'.
+	"daily_refresh_time": "05:00",
+
 	// Type of the display used.
 	// Currently supported options:
 	// 4.01inch - 4.01 inch 7-color display from Waveshare.
