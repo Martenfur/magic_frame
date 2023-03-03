@@ -11,7 +11,9 @@ class LocalImageSource:
 		files = os.listdir(config.current.local_images_path)
 		random.shuffle(files)
 		for file in files:
+			print(file)
 			if not os.isfile(file):
+				print("Not a file!")
 				continue
 			full_path = os.path.join(config.current.local_images_path, file)
 			if not config.current.local_allow_repeats:
