@@ -11,7 +11,7 @@ def read_register(address):
 def print_rtc_time():
 	year = read_register(witty_const.I2C_RTC_YEARS)
 	month = read_register(witty_const.I2C_RTC_MONTHS)
-	day = read_register(witty_const.I2C_RTC_YDAYS)
+	day = read_register(witty_const.I2C_RTC_DAYS)
 	hour = read_register(witty_const.I2C_RTC_HOURS)
 	minute = read_register(witty_const.I2C_RTC_MINUTES)
 	second = read_register(witty_const.I2C_RTC_SECONDS)
