@@ -31,6 +31,6 @@ class AggregationImageSource:
 					if img == None:
 						raise TypeError()
 					return img
-				except:
-					print("Error getting an image! Trying again...")
+				except e:
+					print("Error getting an image! Trying again... Error: " + str(e))
 
