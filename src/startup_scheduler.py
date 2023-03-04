@@ -13,19 +13,19 @@ def schedule_next_startup():
 
 	if config.current.refresh_mode == "hourly":
 		time = now + datetime.timedelta(hours = 1)
-		time.minutes = 0
-		time.seconds = 0
+		time.minute = 0
+		time.second = 0
 	elif config.current.refresh_mode == "debug":
 		time = now + datetime.timedelta(hours = 0, minutes = 3, seconds = 0)
 	else:
 		time = now + datetime.timedelta(days = 1)
 		split = config.current.daily_refresh_time.split(":")
-		time.hours = int(split[0])
-		time.minutes = int(split[1])
-		time.seconds = 0
+		time.hour = int(split[0])
+		time.minute = int(split[1])
+		time.second = 0
 	witty.set_startup_time(time)
 
 def schedule_shutdown(min = 0, sec = 5):
 	now = datetime.datetime.now()
-	shutdown = now + datetime.timedelta(minutes = min, seconds=sec)
+	shutdown = now + datetime.timedelta(minutes = min, seconds = sec)
 	witty.set_shutdown_time(shutdown)
