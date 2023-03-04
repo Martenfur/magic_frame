@@ -12,16 +12,21 @@ def schedule_next_startup():
 
 	if config.current.refresh_mode == "hourly":
 		time = now + datetime.timedelta(hours = 1)
-		time.minute = 0
-		time.second = 0
+		time = time.replace(minute = 0, second = 0)
 	elif config.current.refresh_mode == "debug":
-		time = now + datetime.timedelta(hours = 0, minutes = 3, seconds = 0)
+		time = now + datetime.timedelta(
+			hours = 0, 
+			minutes = 3, 
+			seconds = 0
+		)
 	else:
 		time = now + datetime.timedelta(days = 1)
 		split = config.current.daily_refresh_time.split(":")
-		time.hour = int(split[0])
-		time.minute = int(split[1])
-		time.second = 0
+		time = time.replace(
+			hour = int(split[0]), 
+			minute = int(split[1]), 
+			second = 0
+		)
 	witty.set_startup_time(time)
 	print("Scheduled startup to " + witty.get_startup_time())
 
