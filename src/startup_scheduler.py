@@ -32,6 +32,9 @@ def schedule_next_startup():
 
 
 def schedule_shutdown(min = 0, sec = 5):
+	if not config.current.auto_shutdown:
+		print("Shutdown scheduling disabled.")
+		return
 	now = datetime.datetime.now()
 	shutdown = now + datetime.timedelta(minutes = min, seconds = sec)
 	witty.set_shutdown_time(shutdown)
