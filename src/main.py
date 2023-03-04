@@ -20,4 +20,4 @@ downloaded_art = Art()
 epd.display(downloaded_art.processed_image)
 
 # Shutting down...
-startup_scheduler.schedule_shutdown(sec = 5)
+startup_scheduler.schedule_shutdown(sec = 30)

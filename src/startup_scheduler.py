@@ -8,7 +8,6 @@ def sync_rtc_time():
 	witty.set_rtc_datetime(now)
 
 def schedule_next_startup():
-
 	now = datetime.datetime.now()
 
 	if config.current.refresh_mode == "hourly":
@@ -24,8 +23,11 @@ def schedule_next_startup():
 		time.minute = int(split[1])
 		time.second = 0
 	witty.set_startup_time(time)
+	print("Scheduled startup to " + witty.get_startup_time())
+
 
 def schedule_shutdown(min = 0, sec = 5):
 	now = datetime.datetime.now()
 	shutdown = now + datetime.timedelta(minutes = min, seconds = sec)
 	witty.set_shutdown_time(shutdown)
+	print("Scheduled shutdown to " + witty.get_shutdown_time())
