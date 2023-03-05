@@ -8,6 +8,7 @@ def get_battery_percentage():
 	high = config.current.batery_voltage.high
 	low = config.current.batery_voltage.high
 
+	current_voltage = witty.get_input_voltage()
 	current_voltage = max(low, min(high, current_voltage))
 
 	percentage = ((current_voltage - low) / (high - low)) * 100
@@ -15,7 +16,7 @@ def get_battery_percentage():
 
 
 def battery_low():
-	return witty.get_input_voltage() <= config.current.low_battery_alert_percentage
+	return get_battery_percentage() <= config.current.low_battery_alert_percentage
 
 
 def add_low_battery_icon(img):
