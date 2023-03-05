@@ -24,6 +24,6 @@ class LocalImageSource:
 					continue
 				duplicates.add(full_path)
 			self.last_image_url = full_path
-			self.last_image_name = full_path
+			self.last_image_name = os.path.basename(full_path)
 			return Image.open(full_path)
 		return None
