@@ -5,8 +5,8 @@ import sys
 from PIL import Image
 
 def get_battery_percentage():
-	high = config.current.battery_voltage.high
-	low = config.current.battery_voltage.high
+	high = config.current.battery_voltage["high"]
+	low = config.current.battery_voltage["low"]
 
 	current_voltage = witty.get_input_voltage()
 	current_voltage = max(low, min(high, current_voltage))
