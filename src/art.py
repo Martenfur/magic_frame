@@ -3,7 +3,7 @@ from image_sources.artstation import ArtstationImageSource
 from image_sources.deviantart import DeviantartImageSource
 from image_sources import img_utils
 import orientation
-
+import battery
 import PIL
 from PIL import Image, ImageEnhance
 
@@ -28,6 +28,8 @@ class Art:
 		else:
 			self.original_image = source.get_image(False)
 			self.processed_image = img_utils.resize_image(self.original_image, 480, 800)
+
+		self.processed_image = battery.add_low_battery_icon(self.processed_image)
 
 		self.processed_image = img_utils.rotate_image(self.processed_image, orientation.get())
 
