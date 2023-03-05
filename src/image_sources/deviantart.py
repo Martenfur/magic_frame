@@ -10,6 +10,9 @@ from datetime import timedelta
 import config
 
 class DeviantartImageSource:
+	name = "deviantart"
+	last_image_url = "none"
+	last_image_name = "none"
 
 	_login_endpoint = "https://www.deviantart.com/oauth2/token?client_id=%client_id%&client_secret=%client_secret%&grant_type=client_credentials"
 	_daily_endpoint = "https://www.deviantart.com/api/v1/oauth2/browse/dailydeviations?access_token=%access_token%&date=%date%"
@@ -19,7 +22,6 @@ class DeviantartImageSource:
 
 
 	def __get_art_data(self, art, is_landscape):
-
 		response = self._get_auth(self._metadata_endpoint.replace("%deviationids%", art["deviationid"]))
 		art_data = json.loads(response.text)["metadata"][0]
 		tags = []
@@ -34,7 +36,9 @@ class DeviantartImageSource:
 			print("The image does not fit!")
 			return None
 
-		print("Downloading " + art_data["title"])
+		self.last_image_url = art["url"]
+		self.last_image_name = art_data["title"]
+
 		return img_utils.download_image(art["content"]["src"])
 
 	def _login(self):

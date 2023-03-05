@@ -7,6 +7,10 @@
 	// put our config in there and point Magic Frame to it.
 	"remote_config": "/path/to/config.json",
 
+	// The file where the logs will be stored.
+	"log_file": "logs.log",
+	"pictures_directory": "pics",
+
 	// Specifies which image sources to use. 
 	// Currently available image sources:
 	// deviantart - pulls images from deviantart.com 
@@ -59,7 +63,7 @@
 
 	// If battery percentage is lower than this value, 
 	// Magic Frame will display low battery icon.
-	"low_battery_alert_percentage": "15", 
+	"low_battery_alert_percentage": 15, 
 	"battery_voltage":
 	{
 		// This voltage level is treated as 100%.

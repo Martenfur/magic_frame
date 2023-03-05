@@ -7,6 +7,11 @@ import config
 
 class AggregationImageSource:
 
+	name = "aggregation"
+	last_image_url = "none"
+	last_image_name = "none"
+
+
 	_sources = { 
 		"deviantart" : DeviantartImageSource(),
 		"artstation" : ArtstationImageSource(), 
@@ -30,6 +35,9 @@ class AggregationImageSource:
 					img = src.get_image(is_landscape)
 					if img == None:
 						raise TypeError()
+					self.name = src.name
+					self.last_image_url = src.last_image_url
+					self.last_image_name = src.last_image_name
 					return img
 				except Exception as e:
 					print("Error getting an image! Trying again... Error: " + str(e))

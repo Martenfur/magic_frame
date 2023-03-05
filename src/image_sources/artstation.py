@@ -7,13 +7,17 @@ from . import duplicates
 import random
 
 class ArtstationImageSource:
+	name = "artstation"
+	last_image_url = "none"
+	last_image_name = "none"
+
 	trending_url = "https://www.artstation.com/api/v2/community/explore/projects/community.json?page=%page_num%&dimension=2d&per_page=100&medium_ids%5B%5D=1&medium_ids%5B%5D=10&medium_ids%5B%5D=11&medium_ids%5B%5D=12&medium_ids%5B%5D=13&medium_ids%5B%5D=14"
 	art_base_url = "https://www.artstation.com/projects/"
 
 	def __get_art_data(self, art, is_landscape):
 		if not censor.is_appropriate(art["tags"], art["title"], art["description"]):
 			return None
-
+		print(art)
 		for asset in art["assets"]:
 			# Skipping non-images.
 			if asset["asset_type"] != "image":
@@ -23,8 +27,8 @@ class ArtstationImageSource:
 			if not img_utils.has_acceptable_dimensions(asset["width"], asset["height"], is_landscape):
 				continue
 
-			print(asset["image_url"])
-			print("w: " + str(asset["width"]) + " h: " + str(asset["height"]))
+			self.last_image_name = str(art["title"])
+
 			return img_utils.download_image(asset["image_url"])
 		return None
 
@@ -44,7 +48,7 @@ class ArtstationImageSource:
 				print("Skipping duplicate image: " + data["hash_id"])
 				continue
 			art_url = self.art_base_url + data["hash_id"] + ".json"
-			print(data["url"])
+			self.last_image_url = data["url"]
 
 			art_response = requests.get(art_url)
 			

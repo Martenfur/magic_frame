@@ -6,6 +6,9 @@ from PIL import Image
 import config
 
 class LocalImageSource:
+	name = "local"
+	last_image_url = "none"
+	last_image_name = "none"
 
 	def get_image(self, is_landscape):
 		files = os.listdir(config.current.local_images_path)
@@ -20,5 +23,7 @@ class LocalImageSource:
 				if duplicates.contains(full_path):
 					continue
 				duplicates.add(full_path)
+			self.last_image_url = full_path
+			self.last_image_name = full_path
 			return Image.open(full_path)
 		return None

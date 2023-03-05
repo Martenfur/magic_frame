@@ -4,6 +4,7 @@ config.load()
 from epaper import epd 
 from art import Art
 import startup_scheduler
+import report
 
 # This file is meant to be run on a Raspberry Pi with all hardware installed.
 # Run this from src directory.
@@ -19,5 +20,7 @@ startup_scheduler.schedule_next_startup()
 downloaded_art = Art()
 epd.display(downloaded_art.processed_image)
 
+report.report(downloaded_art)
+
 # Shutting down...
-startup_scheduler.schedule_shutdown(sec = 30)
+startup_scheduler.schedule_shutdown(sec = 10)
