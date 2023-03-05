@@ -23,4 +23,4 @@ epd.display(downloaded_art.processed_image)
 report.report(downloaded_art)
 
 # Shutting down...
-startup_scheduler.schedule_shutdown(sec = 10)
+startup_scheduler.schedule_shutdown(sec = 30)
