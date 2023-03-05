@@ -9,6 +9,7 @@
 
 	// The file where the logs will be stored.
 	"log_file": "logs.log",
+	// Downloaded pictures will be saved here.
 	"pictures_directory": "pics",
 
 	// Specifies which image sources to use. 
