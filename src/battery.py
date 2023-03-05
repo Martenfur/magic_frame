@@ -1,13 +1,22 @@
 import config
 config.load()
 import witty.witty as witty 
-import time
-import datetime
 import sys
 from PIL import Image
 
+def get_battery_percentage():
+	high = config.current.batery_voltage.high
+	low = config.current.batery_voltage.high
+
+	current_voltage = max(low, min(high, current_voltage))
+
+	percentage = ((current_voltage - low) / (high - low)) * 100
+	return round(percentage)
+
+
 def battery_low():
-	return True
+	return witty.get_input_voltage() <= config.current.low_battery_alert_percentage
+
 
 def add_low_battery_icon(img):
 	if not battery_low():

@@ -16,7 +16,7 @@ if len(sys.argv) > 1:
 print("Writing to " + filepath)
 
 with open(filepath, "w") as myfile:
-	myfile.write("time, vin, vout,\n")
+	myfile.write("time, vout, vin,\n")
 while True:
 	with open(filepath, "a") as myfile:
 		for i in range(0, 10):
