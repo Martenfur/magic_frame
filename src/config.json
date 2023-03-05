@@ -55,5 +55,18 @@
 	"epaper_type": "7.3inch",
 
 	// If false, Magic Frame does not shut down after refreshing the image.
-	"auto_shutdown": true
+	"auto_shutdown": true,
+
+	// If battery percentage is lower than this value, 
+	// Magic Frame will display low battery icon.
+	"low_battery_alert_percentage": "15", 
+	"battery_voltage":
+	{
+		// This voltage level is treated as 100%.
+		"high": 4.18,
+		// This voltage level is treated as 0%.
+		"low": 3.2
+		// Note that these voltage levels may not represent your battery.
+		// To measure your battery lifecycle, run measure_battery.py
+	}
 }
