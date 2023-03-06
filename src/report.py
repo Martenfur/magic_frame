@@ -26,10 +26,14 @@ def slugify(value, allow_unicode=True):
 
 def report(art):
 	now = datetime.datetime.now()
-	secs = str(now.timestamp())
-	if not os.path.exists(config.current.pictures_directory):
-		os.makedirs(config.current.pictures_directory)
-	art.original_image.save(config.current.pictures_directory + "/" + slugify(art.image_name) + "_" + secs + ".jpg")
+	try:
+		secs = str(now.timestamp())
+		if not os.path.exists(config.current.pictures_directory):
+			os.makedirs(config.current.pictures_directory)
+		art.original_image.save(config.current.pictures_directory + "/" + slugify(art.image_name) + "_" + secs + ".jpg")
+	except Exception as e:
+		ilog.log(e.message)
+
 	try:
 		ilog.log("datetime: " + str(now))
 		ilog.log("name: " + art.image_name)
