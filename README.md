@@ -6,9 +6,14 @@ Since Magic Frame is turned off most of the time, we can't really log into it. B
 This assumes you already have a working server with an NFS shared folder on your local network.
 
 1. SSH into Magic Frame and run:
-`sudo nano /etc/systemd/system/vault.service`
+`sudo nano /etc/fstab `
 
-2. Paste this into the newly created file:
+1. Add this to the file you just opened:
+`192.168.1.33:/vault /var/vault nfs rw,soft,intr,rsize=8192,wsize=8192,timeo=5 0 0`
+
+2. `sudo nano /etc/systemd/system/vault.service`
+
+3. Paste this into the newly created file:
 ```ini
 [Unit]
 Description = Vault NFS mount.
@@ -17,7 +22,7 @@ Before = magic_frame.service
 
 [Service]
 WorkingDirectory=/home/
-ExecStart = sudo mount -t nfs 192.168.1.33:/vault /var/vault
+ExecStart = sudo mount /var/vault
 
 [Install]
 WantedBy = multi-user.target
