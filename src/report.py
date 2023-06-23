@@ -30,9 +30,11 @@ def report(art):
 		secs = str(now.timestamp())
 		if not os.path.exists(config.current.pictures_directory):
 			os.makedirs(config.current.pictures_directory)
-		art.original_image.save(config.current.pictures_directory + "/" + slugify(art.image_name) + "_" + secs + ".jpg")
+		
+		jpg = art.original_image.convert("RGB")
+		jpg.save(config.current.pictures_directory + "/" + slugify(art.image_name) + "_" + secs + ".jpg")
 	except Exception as e:
-		ilog.log(e.message)
+		ilog.log(e)
 
 	try:
 		ilog.log("datetime: " + str(now))
