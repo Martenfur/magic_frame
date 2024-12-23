@@ -67,8 +67,8 @@ class DeviantartImageSource:
 			if duplicates.contains(data["deviationid"]):
 				print("Skipping duplicate image: " + data["deviationid"])
 				continue
-			if data["category"] != "Visual Art":
-				continue
+			#if data["category"] != "Visual Art":
+			#	continue
 			img = self.__get_art_data(data, is_landscape)
 			if img != None:
 				duplicates.add(data["deviationid"])
